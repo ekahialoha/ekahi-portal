@@ -21,4 +21,8 @@ class ApplicationController < ActionController::API
       ]
     }, status: :bad_request
   end
+
+  def authenticate_user!(options = {})
+    render json: {unauthorized: :true} unless signed_in?
+  end
 end
