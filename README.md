@@ -1,24 +1,9 @@
-# README
+Ekahi Portal API
+======
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+### About This App
+WIP. Will serve as backend API for Portal frontend. README to be updated.
 
-Things you may want to cover:
+### Author
 
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+- [Christian Kelsom-Martin](https://www.chriskelsom.com) - [GitHub](https://github.com/ekahialoha) - [LinkedIn](https://www.linkedin.com/in/ckelsom-martin/)
