@@ -36,12 +36,13 @@ class FeedsController < ApplicationController
   # DELETE /feeds/1
   def destroy
     @feed.destroy
+    render_success_response(:deleted, @feed)
   end
 
   private
     # Use callbacks to share common setup or constraints between actions.
     def current_feed
-      @feed = Feed.find(params[:id])
+      @feed ||= Feed.find(params[:id])
       render_record_not_found_response() unless @feed
     end
 
