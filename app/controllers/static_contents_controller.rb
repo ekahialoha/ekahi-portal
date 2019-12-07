@@ -11,7 +11,8 @@ class StaticContentsController < ApplicationController
   def private
     render json: {
         success: :true,
-        public: :false
+        public: :false,
+        user: current_user
       }
   end
 end
