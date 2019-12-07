@@ -1,5 +1,5 @@
 class FeedsController < ApplicationController
-  before_action :set_feed, only: [:show, :update, :destroy]
+  before_action :current_feed, only: [:show, :update, :destroy]
 
   # GET /feeds
   def index
@@ -18,18 +18,18 @@ class FeedsController < ApplicationController
     @feed = Feed.new(feed_params)
 
     if @feed.save
-      render json: @feed, status: :created, location: @feed
+      render_success_response(:created, @feed)
     else
-      render json: @feed.errors, status: :unprocessable_entity
+      render_unprocessable_entity_response(@feed)
     end
   end
 
   # PATCH/PUT /feeds/1
   def update
     if @feed.update(feed_params)
-      render json: @feed
+      render_success_response(:updated, @feed)
     else
-      render json: @feed.errors, status: :unprocessable_entity
+      render_unprocessable_entity_response(@feed)
     end
   end
 
@@ -40,12 +40,13 @@ class FeedsController < ApplicationController
 
   private
     # Use callbacks to share common setup or constraints between actions.
-    def set_feed
+    def current_feed
       @feed = Feed.find(params[:id])
+      render_record_not_found_response() unless @feed
     end
 
     # Only allow a trusted parameter "white list" through.
     def feed_params
-      params.fetch(:feed, {})
+      params.fetch(:feed, {}).permit(:name, :url)
     end
 end

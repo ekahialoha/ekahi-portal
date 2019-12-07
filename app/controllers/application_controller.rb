@@ -1,5 +1,5 @@
 class ApplicationController < ActionController::API
-  include ActionController::Cookies
+  rescue_from ActiveRecord::RecordNotFound, with: :render_not_found_response
 
   def render_json(response)
     if response.errors.empty?
@@ -24,5 +24,28 @@ class ApplicationController < ActionController::API
 
   def authenticate_user!(options = {})
     render json: {unauthorized: :true} unless signed_in?
+  end
+
+  def render_success_response(status, response)
+    render json: {
+      success: :true,
+      status: status,
+      data: response
+    }
+  end
+
+  def render_unprocessable_entity_response(exception)
+    render json: {
+      error: :true,
+      status: :unprocessable_entity,
+      errors: exception.errors
+    }
+  end
+
+  def render_not_found_response()
+    render json: {
+      error: true,
+      status: :record_not_found,
+    }
   end
 end
