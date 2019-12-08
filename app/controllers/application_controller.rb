@@ -2,7 +2,7 @@ class ApplicationController < ActionController::API
   rescue_from ActiveRecord::RecordNotFound, with: :render_not_found_response
 
   def authenticate_user!(options = {})
-    render json: {unauthorized: :true} unless signed_in?
+    render_exception_response({ unauthorized: :true }, :unauthorized, 401) unless signed_in?
   end
 
   def render_success_response(status, response, code=200)
