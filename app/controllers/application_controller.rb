@@ -5,47 +5,33 @@ class ApplicationController < ActionController::API
     if response.errors.empty?
       render json: response
     else
-      model_validation_error(response)
+      # model_validation_error(response)
+      render_exception_response(response, :bad_request, 400)
     end
-  end
-
-  def model_validation_error(response)
-    render json: {
-      errors: [
-        {
-          status: '400',
-          title: 'Bad Request',
-          detail: response.errors,
-          code: '100'
-        }
-      ]
-    }, status: :bad_request
   end
 
   def authenticate_user!(options = {})
     render json: {unauthorized: :true} unless signed_in?
   end
 
-  def render_success_response(status, response)
+  def render_success_response(status, response, code=200)
     render json: {
       success: :true,
       status: status,
+      code: code,
       data: response
-    }
+    }, status: status
   end
 
-  def render_unprocessable_entity_response(exception)
+  def render_exception_response(exception, status=:unprocessable_entity, code=400)
     render json: {
       error: :true,
-      status: :unprocessable_entity,
-      errors: exception.errors
-    }
+      code: code,
+      errors: exception.fetch(:errors, status)
+    }, status: status
   end
 
   def render_not_found_response()
-    render json: {
-      error: true,
-      status: :record_not_found,
-    }
+    render_exception_response({}, :not_found, 404)
   end
 end

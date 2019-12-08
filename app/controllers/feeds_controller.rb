@@ -20,7 +20,7 @@ class FeedsController < ApplicationController
     if @feed.save
       render_success_response(:created, @feed)
     else
-      render_unprocessable_entity_response(@feed)
+      render_exception_response(@feed)
     end
   end
 
@@ -29,7 +29,7 @@ class FeedsController < ApplicationController
     if @feed.update(feed_params)
       render_success_response(:updated, @feed)
     else
-      render_unprocessable_entity_response(@feed)
+      render_exception_response(@feed)
     end
   end
 
