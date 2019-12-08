@@ -5,7 +5,7 @@ class RegistrationsController < Devise::RegistrationsController
     build_resource(sign_up_params)
 
     if resource.save
-      render_success_response(:created, resource)
+      render_success_response(resource, :created)
     else
       render_exception_response(resource, :bad_request)
     end

@@ -4,7 +4,7 @@ class SessionsController < Devise::SessionsController
   private
 
   def respond_with(resource, _opts = {})
-    render_success_response(:authenticated, resource)
+    render_success_response(resource, :authenticated)
   end
 
   def respond_to_on_destroy

@@ -5,12 +5,12 @@ class FeedsController < ApplicationController
   def index
     @feeds = Feed.all
 
-    render json: @feeds
+    render_success_response(@feeds)
   end
 
   # GET /feeds/1
   def show
-    render json: @feed
+    render_success_response(@feed)
   end
 
   # POST /feeds
@@ -18,7 +18,7 @@ class FeedsController < ApplicationController
     @feed = Feed.new(feed_params)
 
     if @feed.save
-      render_success_response(:created, @feed)
+      render_success_response(@feed, :created)
     else
       render_exception_response(@feed)
     end
@@ -27,7 +27,7 @@ class FeedsController < ApplicationController
   # PATCH/PUT /feeds/1
   def update
     if @feed.update(feed_params)
-      render_success_response(:updated, @feed)
+      render_success_response(@feed, :updated)
     else
       render_exception_response(@feed)
     end
@@ -36,7 +36,7 @@ class FeedsController < ApplicationController
   # DELETE /feeds/1
   def destroy
     @feed.destroy
-    render_success_response(:deleted, @feed)
+    render_success_response(@feed, :deleted)
   end
 
   private
