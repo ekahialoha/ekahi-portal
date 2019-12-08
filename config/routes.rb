@@ -2,7 +2,7 @@ Rails.application.routes.draw do
 
   devise_for :users, skip: :all
   devise_scope :user do
-    resource :users, only: [] do
+    scope '/users' do
       post '/sign_in' => 'sessions#create', as: 'user_session'
       delete '/sign_out' => 'sessions#destroy', as: 'destroy_user_session'
 
