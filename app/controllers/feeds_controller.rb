@@ -27,7 +27,7 @@ class FeedsController < ApplicationController
   # PATCH/PUT /feeds/1
   def update
     if @feed.update(feed_params)
-      render_success_response(@feed, :updated)
+      render_success_response(@feed)
     else
       render_exception_response(@feed)
     end
@@ -36,7 +36,7 @@ class FeedsController < ApplicationController
   # DELETE /feeds/1
   def destroy
     @feed.destroy
-    render_success_response(@feed, :deleted)
+    render_success_response(@feed)
   end
 
   private
