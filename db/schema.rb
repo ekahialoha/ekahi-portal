@@ -25,6 +25,7 @@ ActiveRecord::Schema.define(version: 2019_12_08_030726) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["feed_id"], name: "index_articles_on_feed_id"
+    t.index ["title", "link"], name: "index_articles_on_title_and_link", unique: true
   end
 
   create_table "feeds", force: :cascade do |t|
