@@ -4,7 +4,11 @@ class RegistrationsController < Devise::RegistrationsController
   def create
     build_resource(sign_up_params)
 
-    resource.save
-    render_json(resource)
+    if resource.save
+      # render_json(resource)
+      render_success_response(:created, resource)
+    else
+      render_exception_response(resource, :bad_request)
+    end
   end
 end

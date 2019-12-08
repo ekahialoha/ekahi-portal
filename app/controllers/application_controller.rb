@@ -1,15 +1,6 @@
 class ApplicationController < ActionController::API
   rescue_from ActiveRecord::RecordNotFound, with: :render_not_found_response
 
-  def render_json(response)
-    if response.errors.empty?
-      render json: response
-    else
-      # model_validation_error(response)
-      render_exception_response(response, :bad_request, 400)
-    end
-  end
-
   def authenticate_user!(options = {})
     render json: {unauthorized: :true} unless signed_in?
   end
@@ -27,7 +18,7 @@ class ApplicationController < ActionController::API
     render json: {
       error: :true,
       code: code,
-      errors: exception.fetch(:errors, status)
+      errors: exception.methods.include?(:errors) ? exception.errors : exception
     }, status: status
   end
 
