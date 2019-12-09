@@ -36,19 +36,20 @@ RSpec.describe 'Registrations', type: :request do
 
     context 'when params is missing or invalid' do
       before do
-
+        post @post_url
+        @body = JSON.parse(response.body)
       end
 
       it 'response status code is 400' do
-
+        expect(response.status).to eq 400
       end
 
       it "response contains error" do
-
+        expect(@body['error']).to eq 'true'
       end
 
       it "response contains errors" do
-        
+        expect(@body['errors']).to be_present
       end
     end
   end
