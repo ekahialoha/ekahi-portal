@@ -54,22 +54,27 @@ RSpec.describe 'Authentication', type: :request do
       end
 
       it "response contains errors" do
-        expect(@body['errors']). to be_present
+        expect(@body['errors']).to be_present
       end
     end
   end
 
   describe 'DELETE /users/sign_out' do
-    it "response status code 200" do
+    before do
+      delete '/users/sign_out'
+      @body = JSON.parse(response.body)
+    end
 
+    it "response status code 200" do
+      expect(response.status).to eq 200
     end
 
     it "response contains success: true" do
-
+      expect(@body['success']).to eq true
     end
 
     it "response header contains no authorization token" do
-
+      expect(response.headers['Authorization']).not_to be_present
     end
   end
 end
