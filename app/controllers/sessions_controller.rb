@@ -8,6 +8,6 @@ class SessionsController < Devise::SessionsController
   end
 
   def respond_to_on_destroy
-    head :no_content
+    render_success_response(:no_content)
   end
 end
