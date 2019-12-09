@@ -5,7 +5,7 @@ class ApplicationController < ActionController::API
     render_exception_response({ unauthorized: :true }, :unauthorized, 401) unless signed_in?
   end
 
-  def render_success_response(response, status=:ok, code=200)
+  def render_success_response(response, status = :ok, code = 200)
     render json: {
       success: :true,
       status: status,
@@ -14,7 +14,7 @@ class ApplicationController < ActionController::API
     }, status: status
   end
 
-  def render_exception_response(exception, status=:unprocessable_entity, code=400)
+  def render_exception_response(exception, status = :unprocessable_entity, code = 400)
     render json: {
       error: :true,
       code: code,
