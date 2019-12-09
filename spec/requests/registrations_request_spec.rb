@@ -11,7 +11,7 @@ RSpec.describe 'Registrations', type: :request do
     }
   end
 
-  describe 'registrations#create' do
+  describe 'POST /users' do
     context 'when params is valid' do
         before do
           post @post_url, params: @post_params
