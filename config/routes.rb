@@ -10,9 +10,7 @@ Rails.application.routes.draw do
       put '/password' => 'devise/passwords#update'
       post '/passord' => 'devise/passwords#create'
 
-      patch '/' => 'registrations#update', as: 'user_registration'
-      put '/' => 'registrations#update'
-      post '/' => 'registrations#create'
+      post '/' => 'registrations#create', as: 'user_registration'
       delete '/' => 'registrations#destory'
     end
   end
