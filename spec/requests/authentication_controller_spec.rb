@@ -3,6 +3,7 @@ require 'rails_helper'
 RSpec.describe 'Authentication', type: :request do
 
   before(:each) do
+    @post_url = '/users/sign_in'
     @user = FactoryBot.create(:user)
     @post_params = { user: {
         email: @user.email,
@@ -15,7 +16,7 @@ RSpec.describe 'Authentication', type: :request do
 
     context 'when params is valid' do
       before do
-        post '/users/sign_in', params: @post_params
+        post @post_url, params: @post_params
         @body = JSON.parse(response.body)
       end
 
@@ -40,19 +41,20 @@ RSpec.describe 'Authentication', type: :request do
 
     context 'when params is missing or invalid' do
       before do
-
+        post @post_url
+        @body = JSON.parse(response.body)
       end
 
       it "response status code is 401" do
-
+        expect(response.status).to eq 401
       end
 
       it "response contains error: true" do
-
+        expect(@body['error']).to eq true
       end
 
       it "response contains errors" do
-
+        expect(@body['errors']). to be_present
       end
     end
   end
