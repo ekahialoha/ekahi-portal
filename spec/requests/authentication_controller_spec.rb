@@ -15,23 +15,26 @@ RSpec.describe 'Authentication', type: :request do
 
     context 'when params is valid' do
       before do
-
+        post '/users/sign_in', params: @post_params
+        @body = JSON.parse(response.body)
       end
 
       it "response status code 200" do
-
+        expect(response.status).to eq 200
       end
 
       it "response contains success:true" do
-
+        expect(@body['success']).to eq true
       end
 
       it "response header contains authorization token" do
-
+        expect(response.headers['Authorization']).to be_present
       end
 
       it "response header authorization token is valid" do
-
+        token = response.headers['Authorization'].split(' ').last
+        token = JWT.decode(token, ENV['DEVISE_JWT_SECRET_KEY'], true)
+        expect(token.first['jti']).to be_present
       end
     end
 
