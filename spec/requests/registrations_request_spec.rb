@@ -22,7 +22,7 @@ RSpec.describe 'Registrations', type: :request do
           expect(response.status).to eq 201
         end
 
-        it 'response contains success' do
+        it 'response contains success: true' do
           expect(@body['success']).to eq true
         end
 
@@ -30,7 +30,7 @@ RSpec.describe 'Registrations', type: :request do
           expect(response.headers['Authorization']).to be_present
         end
 
-        it 'response header authorization token is valid  ' do
+        it 'response header authorization token is valid' do
           token = response.headers['Authorization'].split(' ').last
           token = JWT.decode(token, ENV['DEVISE_JWT_SECRET_KEY'], true)
           expect(token.first['jti']).to be_present
@@ -47,7 +47,7 @@ RSpec.describe 'Registrations', type: :request do
         expect(response.status).to eq 400
       end
 
-      it "response contains error" do
+      it "response contains error: true" do
         expect(@body['error']).to eq true
       end
 
