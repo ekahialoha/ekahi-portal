@@ -7,7 +7,7 @@ class ApplicationController < ActionController::API
 
   def render_success_response(response, status = :ok, code = 200)
     render json: {
-      success: :true,
+      success: true,
       status: status,
       code: code,
       data: response
@@ -16,7 +16,7 @@ class ApplicationController < ActionController::API
 
   def render_exception_response(exception, status = :unprocessable_entity, code = 400)
     render json: {
-      error: :true,
+      error: true,
       code: code,
       errors: exception.methods.include?(:errors) ? exception.errors : exception
     }, status: status

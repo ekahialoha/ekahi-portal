@@ -23,7 +23,7 @@ RSpec.describe 'Registrations', type: :request do
         end
 
         it 'response contains success' do
-          expect(@body['success']).to eq 'true'
+          expect(@body['success']).to eq true
         end
 
         it 'response header contains authorization token' do
@@ -48,7 +48,7 @@ RSpec.describe 'Registrations', type: :request do
       end
 
       it "response contains error" do
-        expect(@body['error']).to eq 'true'
+        expect(@body['error']).to eq true
       end
 
       it "response contains errors" do
