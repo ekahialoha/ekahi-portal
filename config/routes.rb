@@ -16,8 +16,10 @@ Rails.application.routes.draw do
   end
 
   # TEMP to test authentication
-  get 'public', to: 'static_contents#public'
-  get 'private', to: 'static_contents#private'
+  get '/public', to: 'static_contents#public'
+  get '/private', to: 'static_contents#private'
+  get '/private/check_admin', to: 'static_contents#check_admin'
+  get '/private/check_elite', to: 'static_contents#check_elite'
 
   resources :feeds
   resources :articles
