@@ -1,7 +1,7 @@
 class StaticContentsController < ApplicationController
-  before_action :authenticate_user!, only: [:private]
+  before_action :authenticate_user!, only: [:private, :check_admin, :check_elite]
   before_action -> { require_role_or_higher(:admin) }, only: [:check_admin]
-  before_action -> { require_role_or_higher(:elite) }, only: [:check_elite] 
+  before_action -> { require_role_or_higher(:elite) }, only: [:check_elite]
 
   def public
       render_success_response({
