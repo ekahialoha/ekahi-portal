@@ -7,6 +7,7 @@ class CreateArticles < ActiveRecord::Migration[6.0]
       t.integer :feed_id
       t.text :link
       t.text :image
+      t.string :url_hash
 
       t.timestamps
     end

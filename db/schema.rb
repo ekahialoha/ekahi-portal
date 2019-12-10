@@ -22,6 +22,7 @@ ActiveRecord::Schema.define(version: 2019_12_08_030726) do
     t.integer "feed_id"
     t.text "link"
     t.text "image"
+    t.string "url_hash"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["feed_id"], name: "index_articles_on_feed_id"
