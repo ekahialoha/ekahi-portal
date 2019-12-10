@@ -1,4 +1,5 @@
 class FeedsController < ApplicationController
+  before_action :authenticate_user!, except: [:index, :show]
   before_action :current_feed, only: [:show, :update, :destroy]
 
   # GET /feeds
