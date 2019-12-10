@@ -36,6 +36,11 @@ namespace :feeds do
 
   desc "Truncates all current cached RSS stories"
   task clear: :environment do
+    puts 'Are you sure you want to clear all Articles? (y/n)'
+    confirm = STDIN.gets.chomp.downcase
+    if confirm == 'y'
+      Article.delete_all
+    end
   end
 
 end
