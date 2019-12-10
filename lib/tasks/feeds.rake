@@ -32,6 +32,7 @@ namespace :feeds do
 
   desc "Cleans up cached RSS stores, will remove anything over 90 days"
   task 'clean:up': :environment do
+    Article.where("created_at < '#{Time.now - 91.day}'").delete_all
   end
 
   desc "Truncates all current cached RSS stories"
