@@ -25,9 +25,7 @@ namespace :feeds do
     duplicate_artiles = Article.where(url_hash: articles.keys)
     duplicate_artiles.each { |dupe| already_stored << dupe[:url_hash] }
 
-    articles.each do |key, article|
-      Article.create(article) unless already_stored.include?(article[:url_hash])
-    end
+    articles.each { |key, article| Article.create(article) unless already_stored.include?(article[:url_hash]) }
   end
 
   desc "Cleans up cached RSS stores, will remove anything over 90 days"
