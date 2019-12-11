@@ -12,6 +12,5 @@ class CreateArticles < ActiveRecord::Migration[6.0]
       t.timestamps
     end
     add_index :articles, :feed_id
-    add_index :articles, [:title, :link], unique: true
   end
 end
